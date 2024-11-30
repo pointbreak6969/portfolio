@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardHeader,
 } from "./ui/card";
-import "../app.css";
+import "../App.css";
 import { Button } from "./ui/button";
 import { Folder, Github, SquareArrowOutUpRight } from "lucide-react";
 import { useState, forwardRef } from "react";
