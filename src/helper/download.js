@@ -1,5 +1,5 @@
 export const pdfDownload = ()=>{
-    const pdfPath ="../assets/Biraj-Baral-cv"
+    const pdfPath ="/Biraj-Baral-cv"
     const link = document.createElement('a');
     link.href = pdfPath;
     link.download = 'Biraj-Baral-cv.pdf';
