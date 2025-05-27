@@ -10,14 +10,7 @@ import Head from "next/head";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import * as z from "zod";
-import {
-  Eye,
-  EyeOff,
-  Lock,
-  Mail,
-  User,
-  AlertCircle,
-} from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { signUpSchema } from "@/schemas/signUpSchema";
 

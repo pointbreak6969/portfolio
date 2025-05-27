@@ -4,11 +4,53 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Eye, EyeOff, Lock, Mail, AlertCircle } from 'lucide-react';
-
-
+import axios from 'axios';
+import { toast } from 'sonner';
+import { signInSchema } from '@/schemas/signInSchema';
+import * as zod from 'zod';
+import {useForm} from 'react-hook-form';	
+import { ErrorMessage } from '@hookform/error-message';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {signIn} from 'next-auth/react';
 export default function Login() {
-    const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [showPassword, setShowPassword] = useState(false);
+  const { register, formState: {errors}, handleSubmit} =  useForm<zod.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+  const onSumit = async (data: zod.infer<typeof signInSchema>) => {
+    setIsSubmitting(true);
+    try {
+      const response = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+      if (response?.error) {
+        toast.error(response.error);
+      } else {
+        toast.success('Login successful!');
+        router.push('/dashboard');
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred. Please try again.');
+        }
+      } else {
+        toast.error('An error occurred. Please try again.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
   return (
     <>
       <Head>
@@ -137,7 +179,7 @@ export default function Login() {
 
               <div className="mt-6">
                 <Link
-                  href="/auth/signup"
+                  href="/signup"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Create an account
