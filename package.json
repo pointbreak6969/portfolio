@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-slot": "^1.1.2",
     "@types/handlebars": "^4.0.40",
     "@types/nodemailer": "^6.4.17",
     "@types/zxcvbn": "^4.4.5",
+    "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
@@ -32,6 +34,7 @@
     "npm": "^11.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
     "sonner": "^2.0.1",
     "tailwind-merge": "^3.0.2",
     "tw-animate-css": "^1.2.4",
