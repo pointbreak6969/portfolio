@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Code, Palette, Zap } from "lucide-react"
 
 export default function About() {
-  const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Python", "PostgreSQL", "AWS"]
+  const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "AWS"]
 
   const features = [
     {
@@ -29,8 +29,8 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Hello, I'm Alex
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Hey, I'm Biraj
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               A passionate full-stack developer creating digital experiences that make a difference
@@ -43,13 +43,15 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-semibold mb-4">About Me</h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                I'm a dedicated developer with over 5 years of experience in creating web applications that solve
-                real-world problems. I love working with cutting-edge technologies and turning complex ideas into
-                simple, beautiful solutions.
+              I'm a passionate Full Stack Developer who loves building things that matter. Whether it's writing clean code, exploring new technologies, or tinkering with hardware, I'm always driven by curiosity and a desire to create.
+              </p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+            With a strong foundation in both frontend and backend development, I enjoy turning ideas into real, functional applications that people actually use and benefit from. My goal is to not just build projects—but to make an impact through them.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                or sharing knowledge with the developer community.
+               Technology, in all its forms, excites me. From hardware circuits to scalable web applications, I’m always learning, experimenting, and pushing my limits.
+
+
               </p>
             </div>
             <div className="relative">

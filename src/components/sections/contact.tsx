@@ -1,89 +1,210 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Code, Palette, Zap } from "lucide-react"
+"use client"
 
-export default function About() {
-  const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Python", "PostgreSQL", "AWS"]
+import type React from "react"
 
-  const features = [
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react"
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission here
+    console.log("Form submitted:", formData)
+    // Reset form
+    setFormData({ name: "", email: "", subject: "", message: "" })
+  }
+
+  const contactInfo = [
     {
-      icon: <Code className="h-8 w-8 text-primary" />,
-      title: "Full-Stack Development",
-      description: "Building end-to-end web applications with modern technologies and best practices.",
+      icon: <Mail className="h-6 w-6" />,
+      title: "Email",
+      content: "alex@example.com",
+      link: "mailto:alex@example.com",
     },
     {
-      icon: <Palette className="h-8 w-8 text-primary" />,
-      title: "UI/UX Design",
-      description: "Creating intuitive and visually appealing user interfaces that enhance user experience.",
+      icon: <Phone className="h-6 w-6" />,
+      title: "Phone",
+      content: "+1 (555) 123-4567",
+      link: "tel:+15551234567",
     },
     {
-      icon: <Zap className="h-8 w-8 text-primary" />,
-      title: "Performance Optimization",
-      description: "Optimizing applications for speed, scalability, and exceptional performance.",
+      icon: <MapPin className="h-6 w-6" />,
+      title: "Location",
+      content: "San Francisco, CA",
+      link: "#",
+    },
+  ]
+
+  const socialLinks = [
+    {
+      icon: <Github className="h-5 w-5" />,
+      label: "GitHub",
+      url: "https://github.com",
+    },
+    {
+      icon: <Linkedin className="h-5 w-5" />,
+      label: "LinkedIn",
+      url: "https://linkedin.com",
+    },
+    {
+      icon: <Twitter className="h-5 w-5" />,
+      label: "Twitter",
+      url: "https://twitter.com",
     },
   ]
 
   return (
-    <section id="about" className="min-h-screen pt-20 pb-16">
+    <section id="contact" className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Hello, I'm Alex
-            </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              A passionate full-stack developer creating digital experiences that make a difference
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Get In Touch</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Have a project in mind or want to collaborate? I'd love to hear from you!
             </p>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full mt-8"></div>
           </div>
 
-          {/* About Content */}
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
             <div>
-              <h3 className="text-2xl font-semibold mb-4">About Me</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                I'm a dedicated developer with over 5 years of experience in creating web applications that solve
-                real-world problems. I love working with cutting-edge technologies and turning complex ideas into
-                simple, beautiful solutions.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                or sharing knowledge with the developer community.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center">
-                <div className="w-48 h-48 bg-muted rounded-full flex items-center justify-center">
-                  <span className="text-4xl">👨‍💻</span>
+              <h3 className="text-2xl font-semibold mb-8">Let's Connect</h3>
+
+              {/* Contact Details */}
+              <div className="space-y-6 mb-8">
+                {contactInfo.map((info, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                      {info.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-medium">{info.title}</h4>
+                      <a href={info.link} className="text-muted-foreground hover:text-primary transition-colors">
+                        {info.content}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h4 className="font-medium mb-4">Follow Me</h4>
+                <div className="flex gap-4">
+                  {socialLinks.map((social, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      size="sm"
+                      asChild
+                      className="hover:bg-primary hover:text-primary-foreground transition-colors"
+                    >
+                      <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+                        {social.icon}
+                      </a>
+                    </Button>
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Skills */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Skills & Technologies</h3>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {skills.map((skill) => (
-                <Badge key={skill} variant="secondary" className="px-4 py-2 text-sm">
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          {/* Features */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
+              {/* Additional Info */}
+              <Card className="mt-8">
                 <CardContent className="pt-6">
-                  <div className="flex justify-center mb-4">{feature.icon}</div>
-                  <h4 className="text-lg font-semibold mb-3">{feature.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                  <h4 className="font-medium mb-2">Quick Response</h4>
+                  <p className="text-sm text-muted-foreground">
+                    I typically respond to emails within 24 hours. For urgent matters, feel free to reach out via phone
+                    or LinkedIn.
+                  </p>
                 </CardContent>
               </Card>
-            ))}
+            </div>
+
+            {/* Contact Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Send a Message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your.email@example.com"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="What's this about?"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell me about your project or idea..."
+                      rows={6}
+                      required
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
